@@ -8,18 +8,21 @@ const questionObj =
         "How many pieces of bun are in a Mcdonald's Big Mac?",
     };
 
-   const {correctAnswer, options, question} = questionObj;
+   
     const questionElement = document.getElementById('question');
     const optionsElement = document.getElementById('options');
     const scoreElement = document.getElementById('score');
+
+    const {correctAnswer, options, question} = questionObj;
 
     let score = 0;
     
     
     questionElement.textContent = question;
-
+   
+    const shuffledOption = shuffleOptions(options);
     
-    options.forEach((option) => {
+    shuffledOption.forEach((option) => {
         const buttonElement = document.createElement('button');
         buttonElement.textContent = option;
         optionsElement.appendChild(buttonElement);
@@ -39,5 +42,14 @@ const questionObj =
     });
 
     
-// scoreElement.textContent = score;
+function shuffleOptions(options) {
+  for(let i = options.length-1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * i+1);
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return options;
+}
+
+
+
     
