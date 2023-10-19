@@ -75,3 +75,16 @@ body {
     font-weight: bold;
     color: #333;
   }
+
+  #next-btn{
+    display: block;
+    margin: 10px auto 0px auto;
+    padding: 10px 20px;
+    border-radius: 45%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    background-color: rgb(74, 74, 243);
+    color:white;
+    
+  }

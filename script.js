@@ -53,11 +53,13 @@ const quesJSON = [
 const questionElement = document.getElementById('question');
 const optionsElement = document.getElementById('options');
 const scoreElement = document.getElementById('score');
+const nextBtn = document.querySelector('#next-btn');
 
 
 
 let score = 0;
 let currentQuestion = 0;
+let totalScore = quesJSON.length;
 
 showQuestion();
 
@@ -77,7 +79,7 @@ function showQuestion() {
         score = score - 0.25;
       }
       
-      scoreElement.textContent = `Score:${score}`;
+      scoreElement.textContent = `Score:${score} / ${totalScore}`;
       nextQuestion();
 
     })
@@ -94,6 +96,7 @@ function nextQuestion() {
   currentQuestion++;
   if (currentQuestion >= quesJSON.length) {
     questionElement.textContent = "Quiz Completed!!";
+    nextBtn.remove();
    
   } else {
 
@@ -102,7 +105,10 @@ function nextQuestion() {
 }
 
 
-
+nextBtn.addEventListener('click', ()=> {
+  scoreElement.textContent =  `Score:${score} / ${totalScore}`;
+  nextQuestion();
+})
 
 
 
