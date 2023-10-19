@@ -1,28 +1,70 @@
-const questionObj = 
-    {
-      category: 'Food & Drink',
-      id: 'qa-1',
-      correctAnswer: 'Three',
-      options: ['Two', 'Three', 'Four', 'Five'],
-      question:
-        "How many pieces of bun are in a Mcdonald's Big Mac?",
-    };
-
+const quesJSON = [
+  {
+    correctAnswer: 'Three ',
+    options: ['Two', 'Three ', 'Four', 'Five'],
+    question:
+      "How many pieces of bun are in a Mcdonald's Big Mac?",
+  },
+  {
+    correctAnswer: 'L. Frank Baum',
+    options: [
+      'Suzanne Collins',
+      'James Fenimore Cooper',
+      'L. Frank Baum',
+      'Donna Leon',
+    ],
+    question:
+      "Which author wrote 'The Wonderful Wizard of Oz'?",
+  },
+  {
+    correctAnswer: 'Atlanta United',
+    options: [
+      'Atlanta United',
+      'Atlanta Impact',
+      'Atlanta Bulls',
+      'Atlanta Stars',
+    ],
+    question:
+      'Which of these is a soccer team based in Atlanta?',
+  },
+  {
+    correctAnswer: 'A Nanny',
+    options: [
+      'A Sow',
+      'A Lioness',
+      'A Hen',
+      'A Nanny',
+    ],
+    question: 'A female goat is known as what?',
+  },
+  {
+    correctAnswer: 'P. L. Travers',
+    options: [
+      'J. R. R. Tolkien',
+      'P. L. Travers',
+      'Lewis Carroll',
+      'Enid Blyton',
+    ],
+    question:
+      "Which author wrote 'Mary Poppins'?",
+  },
+];
    
     const questionElement = document.getElementById('question');
     const optionsElement = document.getElementById('options');
     const scoreElement = document.getElementById('score');
 
-    const {correctAnswer, options, question} = questionObj;
+    
 
     let score = 0;
-    
-    
-    questionElement.textContent = question;
-   
-    const shuffledOption = shuffleOptions(options);
-    
-    shuffledOption.forEach((option) => {
+    let currentQuestion = 0;
+
+
+    function showQuestion() {
+      const {correctAnswer, options, question} = quesJSON[currentQuestion];
+      questionElement.textContent = question;
+      const shuffledOption = shuffleOptions(options);
+      shuffledOption.forEach((option) => {
         const buttonElement = document.createElement('button');
         buttonElement.textContent = option;
         optionsElement.appendChild(buttonElement);
@@ -41,6 +83,14 @@ const questionObj =
     
     });
 
+    }
+    
+    
+    
+   showQuestion();
+    
+    
+    
     
 function shuffleOptions(options) {
   for(let i = options.length-1; i >= 0; i--) {
