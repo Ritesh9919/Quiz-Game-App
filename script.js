@@ -49,52 +49,67 @@ const quesJSON = [
       "Which author wrote 'Mary Poppins'?",
   },
 ];
+
+const questionElement = document.getElementById('question');
+const optionsElement = document.getElementById('options');
+const scoreElement = document.getElementById('score');
+
+
+
+let score = 0;
+let currentQuestion = 0;
+
+showQuestion();
+
+function showQuestion() {
+  const { correctAnswer, options, question } = quesJSON[currentQuestion];
+  questionElement.textContent = question;
+  const shuffledOption = shuffleOptions(options);
+  shuffledOption.forEach((option) => {
+    const buttonElement = document.createElement('button');
+    buttonElement.textContent = option;
+    optionsElement.appendChild(buttonElement);
+    // handling event on button
+    buttonElement.addEventListener('click', () => {
+      if (option === correctAnswer) {
+        score++;
+      } else {
+        score = score - 0.25;
+      }
+      
+      scoreElement.textContent = `Score:${score}`;
+      nextQuestion();
+
+    })
+
+  });
+
+
+
+}
+
+
+function nextQuestion() {
+  optionsElement.textContent = '';
+  currentQuestion++;
+  if (currentQuestion >= quesJSON.length) {
+    questionElement.textContent = "Quiz Completed!!";
    
-    const questionElement = document.getElementById('question');
-    const optionsElement = document.getElementById('options');
-    const scoreElement = document.getElementById('score');
+  } else {
 
-    
-
-    let score = 0;
-    let currentQuestion = 0;
+    showQuestion();
+  }
+}
 
 
-    function showQuestion() {
-      const {correctAnswer, options, question} = quesJSON[currentQuestion];
-      questionElement.textContent = question;
-      const shuffledOption = shuffleOptions(options);
-      shuffledOption.forEach((option) => {
-        const buttonElement = document.createElement('button');
-        buttonElement.textContent = option;
-        optionsElement.appendChild(buttonElement);
-        // handling event on button
-        buttonElement.addEventListener('click', ()=> {
-          if(option === correctAnswer) {
-            score++;
-          }else {
-            score = score-0.25;
-          }
-          console.log(score);
-          scoreElement.textContent = `Score:${score}`;
-          questionElement.textContent = "Quiz Completed!!";
-          optionsElement.textContent = '';
-        })
-    
-    });
 
-    }
-    
-    
-    
-   showQuestion();
-    
-    
-    
-    
+
+
+
+
 function shuffleOptions(options) {
-  for(let i = options.length-1; i >= 0; i--) {
-    const j = Math.floor(Math.random() * i+1);
+  for (let i = options.length - 1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * i + 1);
     [options[i], options[j]] = [options[j], options[i]];
   }
   return options;
@@ -102,4 +117,3 @@ function shuffleOptions(options) {
 
 
 
-    
